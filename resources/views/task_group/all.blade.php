@@ -1,4 +1,4 @@
-<div class="w-11/12 xl:w-4/12 overflow-y-auto xl:h-[40rem] bg-white shadow-sm sm:rounded-lg">
+<div class="w-9/12 l:w-4/12 mx-auto overflow-y-auto xl:h-[40rem] bg-white shadow-sm sm:rounded-lg flex flex-col justify-between">
     <div class="p-6 text-gray-900">
         <div class="group-header">
             <h3 class="text-md text-center mb-6">{{ __('All tasks') }}</h3>
@@ -11,4 +11,5 @@
             @endforeach
         @endif
     </div>
+    @include ('task.partials.new-task', ['taskGroupId' => null])
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskGroup;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskGroupController extends Controller
@@ -10,9 +11,14 @@ class TaskGroupController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $taskGroups = User::find(request()->user()->id)->taskGroups()->get();
+
+        if(request()->query('group'))
+            $group = $taskGroups->find(request()->query('group'));
+
+        return view('task_group.index', ['groups' => $taskGroups, 'selectedGroup' => $group ?? null]);
     }
 
     /**
@@ -44,9 +50,19 @@ class TaskGroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TaskGroup $taskGroup)
-    {
-        //
+    public function show($taskGroup)
+    {   
+        $user = User::find(request()->user()->id);
+
+        if($taskGroup === 'all')
+            $group = view('task_group.all', ['tasks' => $user->tasks()->get()]);
+        else if($taskGroup === 'completed')
+            $group = view('task_group.completed',['tasks' => $user->completedTasks()->get()]);
+        else
+            $group = view('task_group.partials.group',['group' => $user->taskGroups()->find($taskGroup)]);
+
+
+        return view('task_group.show', compact('group'));
     }
 
     /**

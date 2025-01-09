@@ -30,6 +30,15 @@
                         </button>
                         </x-slot>
                         <x-slot name="content">
+                        <x-dropdown-link :href="route('task-group.index')">
+                            {{__('List of groups')}}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('task-group.show', 'all')">
+                            {{__('All tasks')}}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('task-group.show', 'completed')">
+                            {{__('Completed tasks')}}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('task-group.create')">
                             {{ __('New group') }}
                         </x-dropdown-link>
@@ -91,6 +100,25 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800">{{ __('Task groups') }}</div>
+            </div>
+            <div class="mt-3 space-y-1">
+                        <x-responsive-nav-link :href="route('task-group.index')">
+                            {{__('List of groups')}}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('task-group.show', 'all')">
+                            {{__('All tasks')}}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('task-group.show', 'completed')">
+                            {{__('Completed tasks')}}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('task-group.create')">
+                            {{ __('New group') }}
+                        </x-responsive-nav-link>
+            </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

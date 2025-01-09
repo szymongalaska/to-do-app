@@ -8,21 +8,20 @@
     <div class="py-12">
 
     <div class="w-full xl:h-[40rem] mx-auto sm:px-6 lg:px-8 flex gap-4 justify-center flex-col xl:flex-row items-center">
-        @include('task.all', ['tasks' => $allTasks])
+        @include('task_group.all', ['tasks' => $allTasks])
         
         @if($groups->isNotEmpty())
-            @include('task_group.groups ', ['groups' => $groups])
+            @foreach($groups as $group)
+                @include('task_group.partials.group ', ['group' => $group])
+            @endforeach
         @endif
 
         @if($completedTasks->isNotEmpty())
-            @include('task.completed', ['tasks' => $completedTasks])
+            @include('task_group.completed', ['tasks' => $completedTasks])
         @endif
     </div>
 
     </div>
-        <div class="mt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @include ('task.partials.new-task', ['groups' => $groups])
-        </div>
     </div>
 <script>
     $(function(){
