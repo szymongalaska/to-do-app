@@ -48,13 +48,23 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function taskGroup()
+    public function taskGroups()
     {
         return $this->HasMany(TaskGroup::class);
     }
 
-    public function task()
+    public function tasks()
     {
         return $this->HasMany(Task::class);
+    }
+
+    public function incompleteTasks()
+    {
+        return $this->tasks()->where('completed_at', null);
+    }
+
+    public function completedTasks()
+    {
+        return $this->tasks()->where('completed_at', '!=', 'NULL');
     }
 }

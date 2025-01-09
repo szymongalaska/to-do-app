@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->foreignIdFor(\App\Models\TaskGroup::class, 'task_group_id');
+            $table->foreignIdFor(\App\Models\TaskGroup::class, 'task_group_id')->nullable();
             $table->text('task');
             $table->dateTime('deadline')->nullable();
             $table->dateTime('completed_at')->nullable();

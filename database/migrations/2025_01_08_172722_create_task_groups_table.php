@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->string('name');
-            $table->string('color', 6)->nullable();
+            $table->string('color', 9)->nullable();
             $table->string('icon', 25)->nullable();
             $table->timestamps();
         });

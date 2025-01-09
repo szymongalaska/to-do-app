@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\TaskGroup;
 
@@ -18,11 +19,12 @@ class Task extends Model
 
     protected $appends = [
         'is_completed',
+        'is_near_deadline'
     ];
 
     public function taskGroup()
     {
-        $this->belongsTo(TaskGroup::class);
+        return $this->belongsToMany(TaskGroup::class);
     }
 
     protected function getIsCompletedAttribute()
@@ -33,7 +35,14 @@ class Task extends Model
     protected function casts()
     {
         return [
-            'completed_at' => 'datetime'
+            'completed_at' => 'datetime',
+            'deadline' => 'datetime'
         ];
+    }
+
+    protected function getIsNearDeadlineAttribute()
+    {
+        $date = new Carbon($this->deadline);
+        return $date->diffInDays(Carbon::now(), true) <= 3 ? true : false;
     }
 }

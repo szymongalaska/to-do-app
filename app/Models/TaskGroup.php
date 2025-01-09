@@ -18,4 +18,9 @@ class TaskGroup extends Model
     {
         return $this->HasMany(Task::class);
     }
+
+    public function incompleteTasks()
+    {
+        return $this->HasMany(Task::class)->where('completed_at', NULL);
+    }
 }
