@@ -6,8 +6,9 @@
                 <input required
                     class="border-0 ring-0 focus:ring-0 rounded-md block w-full"
                     type="text" name="task">
-                <input class="border-none focus:ring-0 block w-2/12 float-right"
+                <input class="invisible w-1"
                     type="datetime-local" name="deadline">
+                <span class="border-none focus:ring-0 block w-2/12 float-right material-symbols-outlined cursor-pointer date-picker">date_range</s>
             </div>
 
             @if($taskGroupId)

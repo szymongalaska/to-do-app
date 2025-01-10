@@ -74,4 +74,9 @@ $(function () {
             }
         })
     });
+
+    $(document).on('click', 'span.date-picker', function(){
+        let input = $(this).siblings('input[type="datetime-local"]')[0];
+        $(input)[0].showPicker();
+    });
 });
