@@ -5,11 +5,12 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskGroupController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::middleware('guest')->get('/', function () {
     return to_route('login');
 });
 
 Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/', [TaskController::class, 'dashboard'])->name('tasks');
     Route::get('/tasks', [TaskController::class, 'dashboard'])->name('tasks');
     Route::resource('/task', TaskController::class);
     Route::resource('/task-group', TaskGroupController::class);
