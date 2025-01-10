@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\User;
+use App\Models\TaskGroup;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
@@ -25,7 +26,7 @@ class TaskController extends Controller
         $incompleteTasks = $user->incompleteTasks()->orderBy('created_at', 'desc')->get();
         $completedTasks = $user->completedTasks()->orderBy('completed_at', 'desc')->get();
 
-        return view('dashboard', [ 'allTasks' => $incompleteTasks, 'groups' => $userGroups, 'completedTasks' => $completedTasks]);
+        return view('dashboard', [ 'allTasks' => $incompleteTasks, 'groups' => $userGroups, 'completedTasks' => $completedTasks, 'sortOrders' => TaskGroup::ORDERS]);
     }
 
     public function complete(Request $request, Task $task)
@@ -61,9 +62,9 @@ class TaskController extends Controller
 
         $data['user_id'] = request()->user()->id;
 
-        Task::create($data);
+        $task = Task::create($data);
 
-        return redirect()->back();
+        return response()->json(['success' => true, 'task_group_id' => $task->task_group_id, 'view' => view('task.partials.task', compact('task'))->render()]);
     }
 
     /**

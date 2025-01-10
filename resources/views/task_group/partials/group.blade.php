@@ -1,7 +1,11 @@
-<div class="w-9/12 l:w-4/12 overflow-y-auto xl:h-[40rem] border-white border-2 shadow-sm sm:rounded-lg mx-auto flex flex-col justify-between"
+@php
+    $currentOrder = implode('.', $group->order);
+    $sortOrders ??= null;
+@endphp
+
+<div class="w-11/12 l:w-4/12 h-16 h-[40rem] border-white border-2 shadow-sm rounded-lg mx-auto flex flex-col justify-between task-group"
     style="background-color: {{ $group->color }};">
-    <div class="p-6 text-gray-900">
-        <div class="group-header flex justify-between items-center mb-6">
+    <div class="group-header flex justify-between items-center mb-6 p-6 pb-0 text-gray-900">
             <span class="material-symbols-outlined">{{ $group->icon }}</span>
             <h3 class="text-md text-center">{{ $group->name }}</h3>
             <x-main-dropdown>
@@ -17,17 +21,31 @@
                     <x-dropdown-link :href="route('task-group.edit', $group->id)">
                         {{ __('Edit group') }}
                     </x-dropdown-link>
+                    @if($sortOrders)
+                    <div class="font-medium text-sm text-base text-gray-400 ml-2 mt-2">{{ __('Sort') }}</div>
+
+                    @foreach($sortOrders as $label => $order)
+                    <x-dropdown-link class="sort-link @if($currentOrder === $order) text-gray-800 @endif" data-order="{{ $order }}"
+                        :href="route('task-group.update-order', $group)">
+                        {{ __($label) }}
+                    </x-dropdown-link>
+                    @endforeach
+
+                    @endif
                 </x-slot>
 
             </x-main-dropdown>
         </div>
-        @if($group->incompleteTasks->isEmpty())
-            {{ __("You don't have any tasks yet.") }}
-        @else
-            @foreach($group->incompleteTasks as $task)
-                @include('task.partials.task', ['task' => $task])
-            @endforeach
-        @endif
+    <div class="p-6 text-gray-900 overflow-y-auto">
+        <div class="tasks" data-group-id="{{$group->id}}">
+            @if($group->incompleteTasks->isEmpty())
+                <x-info-label>{{ __("You don't have any tasks yet.") }}</x-info-label>
+            @else
+                @foreach($group->incompleteTasks as $task)
+                    @include('task.partials.task', ['task' => $task])
+                @endforeach
+            @endif
+        </div>
     </div>
-        @include ('task.partials.new-task', ['taskGroupId' => $group->id])
+    @include ('task.partials.new-task', ['taskGroupId' => $group->id])
 </div>

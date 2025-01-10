@@ -59,10 +59,13 @@ class TaskGroupController extends Controller
         else if($taskGroup === 'completed')
             $group = view('task_group.completed',['tasks' => $user->completedTasks()->get()]);
         else
-            $group = view('task_group.partials.group',['group' => $user->taskGroups()->find($taskGroup)]);
+            $group = view('task_group.partials.group',['group' => $user->taskGroups()->find($taskGroup), 'sortOrders' => TaskGroup::ORDERS]);
 
 
-        return view('task_group.show', compact('group'));
+        if(request()->ajax())
+            return $group;
+        else
+            return view('task_group.show', compact('group'));
     }
 
     /**
@@ -86,7 +89,17 @@ class TaskGroupController extends Controller
 
         $taskGroup->update($data);
 
-        return to_route('dashboard');
+        return to_route('tasks');
+    }
+
+    public function updateOrder(Request $request, TaskGroup $taskGroup)
+    {
+        $data = $request->validate([
+            'order' => 'required|in:'.implode(',', TaskGroup::ORDERS),
+        ]);
+
+        $taskGroup->update($data);
+        return response()->view('task_group.partials.group', ['group' => $taskGroup, 'sortOrders' => TaskGroup::ORDERS]);
     }
 
     /**

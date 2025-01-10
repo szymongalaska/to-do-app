@@ -37,5 +37,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @vite(['resources/js/footer.js'])
     </body>
 </html>

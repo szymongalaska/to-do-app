@@ -10,16 +10,17 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/dashboard', [TaskController::class, 'dashboard'])->name('dashboard');
+    Route::get('/tasks', [TaskController::class, 'dashboard'])->name('tasks');
     Route::resource('/task', TaskController::class);
     Route::resource('/task-group', TaskGroupController::class);
     Route::post('/task/{task}/complete', [TaskController::class, 'complete'])->name('task.complete');
+    Route::patch('/task-group/{task_group}/update-order', [TaskGroupController::class, 'updateOrder'])->name('task-group.update-order');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::midcdleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';

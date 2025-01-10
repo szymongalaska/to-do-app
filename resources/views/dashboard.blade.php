@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('To do') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,9 @@
         
         @if($groups->isNotEmpty())
             @foreach($groups as $group)
-                @include('task_group.partials.group ', ['group' => $group])
+                @if($group->incompleteTasks->isNotEmpty())
+                    @include('task_group.partials.group ', [$group, $sortOrders])
+                @endif
             @endforeach
         @endif
 
@@ -23,52 +25,4 @@
 
     </div>
     </div>
-<script>
-    $(function(){
-        $('input[type="radio"]').on('click', function(){
-            if($(this).is(':checked')){
-                let tasks = $('[data-task="'+$(this).val()+'"]');
-                let taskId = $(this).val();
-                let url = $(this).data('href');
-
-                $.ajax({
-                    'headers': {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    'method': 'POST',
-                    'url': url,
-                    success: function(response)
-                    {
-                        tasks.hide('slow', function(){
-                            tasks.remove()
-                        });
-
-                        $('div.completed-tasks').prepend(response);
-                    }
-                });
-            }
-        });
-    });
-        // $(function () {
-        //     $('form#new-task').on('submit', function (e) {
-        //         e.preventDefault();
-        //         let form = $(this);
-        //         $.ajax({
-        //             'method': $(form).attr('method'),
-        //             'url': $(form).attr('action'),
-        //             'data': $(form).serializeArray(),
-
-        //             success: function(response)
-        //             {
-        //                 $('div#create-task').replaceWith(response);
-        //             },
-        //             error: function(response)
-        //             {
-        //                 console.log(response);
-        //             }
-        //         });
-
-        //     });
-        // });
-</script>
 </x-app-layout>

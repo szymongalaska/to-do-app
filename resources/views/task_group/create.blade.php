@@ -10,7 +10,7 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                 <form method="POST" action=" {{ route('task-group.store') }}" class="mt-6 space-y-6">
                     @csrf
                     <div class="flex flex-row items-center justify-center gap-4">
@@ -24,7 +24,7 @@
                             <x-input-label for="color" :value="__('Color')" />
                             <x-color-picker name="color" :options="['default' => '#A0AEC0', 'theme' => 'classic', 'components' => ['opacity' => true, 'hue' => true, 'interaction' => ['input' => true, 'hex' => true, 'cancel' => true, 'save' => true]]]"></x-color-picker>
                         </div>
-                        <div class="w-2/12 h-16 flex flex-col justify-between">
+                        <div class="w-3/12 lg:2/12 h-16 flex flex-col justify-between">
                             <x-input-label for="icon" :value="__('Icon')" />
                             <select name="icon"
                                 class="material-symbols-outlined border-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block">
