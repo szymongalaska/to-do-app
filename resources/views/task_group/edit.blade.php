@@ -10,7 +10,7 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+            <div class="p-4 sm:p-8 bg-white shadow rounded-lg">
                 <form method="POST" action=" {{ route('task-group.update', $group) }}" class="mt-6 space-y-6">
                     @csrf
                     @method('PUT')
@@ -18,7 +18,7 @@
                         <div class="w-5/12 h-16 flex flex-col justify-between">
                             <x-input-label for="name" :value="__('Name of group')" />
                             <input
-                                class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block"
+                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block"
                                 type="text" required value="{{ $group->name }}" name="name">
                         </div>
                         <div class="w-8 h-16 flex flex-col justify-between">
@@ -28,7 +28,7 @@
                         <div class="w-2/12 h-16 flex flex-col justify-between">
                             <x-input-label for="icon" :value="__('Icon')" />
                             <select name="icon"
-                                class="material-symbols-outlined border-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block">
+                                class="material-symbols-outlined border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block">
                                 @foreach($icons as $icon)
                                     <option @if($icon['name'] == $group->icon) selected @endif value="{{ $icon['name'] }}"
                                         class="text-{{ $icon['color'] }} material-symbols-outlined">{{ $icon['name'] }}
