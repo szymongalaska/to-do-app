@@ -1,4 +1,4 @@
-<div class="w-11/12 l:w-4/12 mx-auto h-[40rem] bg-white shadow-sm rounded-lg flex flex-col justify-between">
+<div class="w-11/12 l:w-4/12 mx-auto h-[40rem] bg-white shadow-sm rounded-lg flex flex-col">
     <div class="group-header p-6 pb-0 text-gray-900">
         <h3 class="text-md text-center mb-6">{{ __('Completed tasks') }}</h3>
     </div>
