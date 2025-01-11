@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskGroupController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/task/{task}/complete', [TaskController::class, 'complete'])->name('task.complete');
     Route::patch('/task-group/{task_group}/update-order', [TaskGroupController::class, 'updateOrder'])->name('task-group.update-order');
 });
+
+Route::post('/language-change', [LanguageController::class, 'update'])->name('language.change');
 
 // Route::midcdleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

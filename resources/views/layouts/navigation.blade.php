@@ -49,6 +49,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @include('components.language-form')
                 <x-main-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -116,6 +117,27 @@
                             {{ __('New group') }}
                         </x-responsive-nav-link>
             </div>
+
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800 flex items-center cursor-pointer text-xs text-gray-800">
+                    {{__('Language')}}
+                    <span class="material-symbols-outlined ml-1">language</span>
+                </div>
+            </div>
+            <div class="mt-3 space-y-1">
+            <form action="{{route('language.change')}}" method="POST">
+    @csrf
+    <input type="hidden" name="language" value="pl">
+    <x-dropdown-button lang="pl">{{ __('Polish') }}</x-dropdown-button>
+</form>
+<form action="{{route('language.change')}}" method="POST">
+    @csrf
+    <input type="hidden" name="language" value="en">
+    <x-dropdown-button lang="en">{{ __('English') }}</x-dropdown-button>
+</form>
+            </div>
+        </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
