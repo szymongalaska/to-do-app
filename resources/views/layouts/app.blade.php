@@ -37,6 +37,8 @@
                 {{ $slot }}
             </main>
         </div>
+        <p class="text-gray-400 text-xs text-center bg-gray-100 pb-2">© 2025 Szymon Gałąska. All rights reserved.</p>
+        <p class="text-gray-400 text-xs text-center bg-gray-100 pb-2">Emoji art supplied by Twemoji © 2019 Twitter, Inc and other contributors, licensed under CC-BY 4.0.</p>
         @vite(['resources/js/footer.js'])
     </body>
 </html>
