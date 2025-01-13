@@ -16,11 +16,15 @@ $(function () {
 
                 $(form).find('button').html('check').removeClass('animate-spin').addClass('text-green-600');
 
+
                 let task = $(response.view).hide();
+
+                $('div.tasks[data-group-id="all"]').find('div.info').animate({opacity: 0}, 'slow', function(){$(this).hide().css('opacity', '1')});
                 $('div.tasks[data-group-id="all"]').prepend(task);
 
                 if (response.task_group_id) {
                     let task2 = $(task).clone();
+                    $('div.tasks[data-group-id="' + response.task_group_id + '"]').find('div.info').animate({opacity:0 }, 'slow', function(){$(this).hide().css('opacity', '1')});
                     $('div.tasks[data-group-id="' + response.task_group_id + '"]').prepend(task2);
                     task2.show('slow');
                 }

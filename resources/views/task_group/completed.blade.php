@@ -1,13 +1,12 @@
 <div class="w-11/12 l:w-4/12 mx-auto h-[40rem] bg-white shadow-sm rounded-lg flex flex-col">
-    <div class="group-header p-6 pb-0 text-gray-900">
+    <div class="group-header p-6 pb-0 text-gray-900 border-gray-300 border-b">
         <h3 class="text-md text-center mb-6">{{ __('Completed tasks') }}</h3>
     </div>
     <div class="p-6 text-gray-900 overflow-y-auto">
         <div class="completed-tasks">
             @if($tasks->isEmpty())
-                <x-info-label>{{__("You haven't completed any tasks yet.")}}</x-info-label>
+                <x-info-label icon="check_circle">{{__("You haven't completed any tasks yet.")}}</x-info-label>
             @else
-
                 @foreach($tasks as $task)
                     @include('task.partials.completed-task', ['task' => $task])
                 @endforeach

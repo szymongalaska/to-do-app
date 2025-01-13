@@ -5,7 +5,8 @@
 
 <div class="w-11/12 l:w-4/12 h-16 h-[40rem] border-white border-2 shadow-sm rounded-lg mx-auto flex flex-col justify-between task-group"
     style="background-color: {{ $group->color }};">
-    <div class="group-header flex justify-between items-center mb-6 p-6 pb-0 text-gray-900">
+    <div>
+    <div class="group-header flex justify-between items-center mb-6 p-6 pb-0 text-gray-900 border-gray-300 border-b">
             <span class="material-symbols-outlined">{{ $group->icon }}</span>
             <h3 class="text-md text-center">{{ $group->name }}</h3>
             <x-main-dropdown>
@@ -38,14 +39,12 @@
         </div>
     <div class="p-6 text-gray-900 overflow-y-auto">
         <div class="tasks" data-group-id="{{$group->id}}">
-            @if($group->incompleteTasks->isEmpty())
-                <x-info-label>{{ __("You don't have any tasks yet.") }}</x-info-label>
-            @else
+                <x-info-label :hidden="!$group->incompleteTasks->isEmpty()" icon="check_circle">{{ __("You don't have any tasks yet.") }}</x-info-label>
                 @foreach($group->incompleteTasks as $task)
                     @include('task.partials.task', ['task' => $task])
                 @endforeach
-            @endif
         </div>
+    </div>
     </div>
     @include ('task.partials.new-task', ['taskGroupId' => $group->id])
 </div>

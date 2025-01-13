@@ -18,9 +18,7 @@
             @endforeach
         @endif
 
-        @if($completedTasks->isNotEmpty())
-            @include('task_group.completed', ['tasks' => $completedTasks])
-        @endif
+        @include('task_group.completed', ['tasks' => $completedTasks])
     </div>
 
     </div>
