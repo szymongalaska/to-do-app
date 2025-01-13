@@ -1,5 +1,5 @@
 <div class="w-11/12 l:w-4/12 mx-auto h-[40rem] bg-white shadow-sm rounded-lg flex flex-col justify-between task-group">
-    <div>
+    <div class="flex flex-col h-[34rem]">
     <div class="group-header p-6 pb-0 text-gray-900 border-gray-300 border-b">
         <h3 class="text-md text-center mb-6">{{ __('All tasks') }}</h3>
     </div>
