@@ -10,7 +10,7 @@ Route::middleware('guest')->get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/', [TaskController::class, 'dashboard'])->name('tasks');
+    Route::get('/', [TaskController::class, 'dashboard']);
     Route::get('/tasks', [TaskController::class, 'dashboard'])->name('tasks');
     Route::resource('/task', TaskController::class);
     Route::resource('/task-group', TaskGroupController::class);
