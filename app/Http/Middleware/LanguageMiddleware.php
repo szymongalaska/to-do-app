@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LanguageMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request by updating locale if data in session is provided
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */

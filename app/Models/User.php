@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\TaskGroup;
@@ -49,22 +50,38 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function taskGroups()
+    /**
+     * Return TaskGroup relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<TaskGroup, $this>
+     */
+    public function taskGroups(): HasMany
     {
         return $this->HasMany(TaskGroup::class);
     }
 
-    public function tasks()
+    /**
+     * Return Task relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Task, $this>
+     */
+    public function tasks(): HasMany
     {
         return $this->HasMany(Task::class);
     }
 
-    public function incompleteTasks()
+    /**
+     * Return Task relationship where tasks have not been completed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Task, $this>
+     */
+    public function incompleteTasks(): HasMany
     {
         return $this->tasks()->where('completed_at', null);
     }
 
-    public function completedTasks()
+    /**
+     * Return Task relationship where tasks have been completed
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Task, $this>
+     */
+    public function completedTasks(): HasMany
     {
         return $this->tasks()->where('completed_at', '!=', 'NULL');
     }

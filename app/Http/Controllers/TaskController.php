@@ -19,6 +19,11 @@ class TaskController extends Controller
         //
     }
 
+    /**
+     * Display dashboard
+     * 
+     * @return \Illuminate\Contracts\View\View
+     */
     public function dashboard()
     {
         $user = User::find(request()->user()->id);
@@ -29,6 +34,12 @@ class TaskController extends Controller
         return view('dashboard', [ 'allTasks' => $incompleteTasks, 'groups' => $userGroups, 'completedTasks' => $completedTasks, 'sortOrders' => TaskGroup::ORDERS]);
     }
 
+    /**
+     * Update task - set as completed
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Task $task
+     * @return \Illuminate\Contracts\View\View
+     */
     public function complete(Request $request, Task $task)
     {
         $result = $task->update(['completed_at' => Carbon::now()]);

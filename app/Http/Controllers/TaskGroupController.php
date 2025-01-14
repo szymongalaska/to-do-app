@@ -11,7 +11,7 @@ class TaskGroupController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $taskGroups = User::find(request()->user()->id)->taskGroups()->get();
 
@@ -92,6 +92,12 @@ class TaskGroupController extends Controller
         return to_route('tasks');
     }
 
+    /**
+     * Update order attribute of specified resource
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\TaskGroup $taskGroup
+     * @return mixed|\Illuminate\Http\Response
+     */
     public function updateOrder(Request $request, TaskGroup $taskGroup)
     {
         $data = $request->validate([
